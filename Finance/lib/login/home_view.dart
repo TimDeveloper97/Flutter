@@ -1,9 +1,8 @@
 import 'dart:html';
-
+import 'package:finance/login/signin_view.dart';
 import 'package:finance/shares/my_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../icons/my_flutter_app_icons.dart';
 
 class MyHomeLoginPage extends StatelessWidget {
@@ -81,6 +80,7 @@ class MyHomeLoginPage extends StatelessWidget {
                     myButtonIconOutline(
                         'Sign in with Google', MyFlutterApp.google_1, () {
                       print('sign in click');
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const NavigationSignInScreen()));
                     }),
                     const SizedBox(
                       height: 20,
