@@ -1,9 +1,13 @@
+import 'package:finance/login/signup_view.dart';
 import 'package:finance/shares/my_colors.dart';
 import 'package:flutter/material.dart';
 import '../icons/my_flutter_app_icons.dart';
+import '../models/login.dart';
 
 class NavigationSignInScreen extends StatefulWidget {
-  const NavigationSignInScreen({Key? key}) : super(key: key);
+  NavigationSignInScreen({Key? key}) : super(key: key);
+
+  final Login _login = Login();
 
   @override
   _NavigationSignInScreenState createState() => _NavigationSignInScreenState();
@@ -14,8 +18,8 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-      children: [
-        Stack(
+        children: [
+          Stack(
           children: [
             Image.asset(
               'assets/images/login_background.png',
@@ -31,13 +35,14 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back,
-                        color: MyColors.blue, size: 35),
+                        color: MyColors.blue, size: 38),
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       primary: Colors.transparent,
-                      padding: const EdgeInsets.all(20),
-                      onPrimary: Colors.white.withOpacity(0),
+                      padding: const EdgeInsets.all(15),
+                      onPrimary: Colors.transparent.withOpacity(0.5),
                       elevation: 0.0,
+                      shadowColor: Colors.transparent,
                     ),
                   ),
                 ),
@@ -65,7 +70,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
               child: Card(
                 semanticContainer: true,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                shadowColor: MyColors.gray.withOpacity(0.5),
+                shadowColor: Colors.black.withOpacity(0.5),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
@@ -96,50 +101,92 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
                         ),
                       ),
                       const SizedBox(height: 30),
-                      myTextFieldTitle(
-                          'Username or email', 'Enter your username or email'),
-                      myTextFieldTitle('Password', 'Enter your password'),
+                      TextFieldTitle('Username or email',
+                          'Enter your username or email', widget._login.username, false),
+                      TextFieldTitle('Password', 'Enter your password', widget._login.password, true),
                       Container(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.only(left: 15, bottom: 15),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
                             children: [
-                              const Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                  color: MyColors.blue,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w900,
+                                      color: MyColors.blue,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        print('click Sign in');
+                                        onClickSignIn(widget._login);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: MyColors.blue,
+                                        onPrimary:
+                                            MyColors.gray.withOpacity(0.1),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        'Sign in',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 30),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    print('click Sign in');
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    primary: MyColors.blue,
-                                    onPrimary: MyColors.blue.withOpacity(0.5),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Sign in',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              )
                             ],
                           )),
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            const Text(
+                              'Don\'t have an account? ',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  onClickLinkSignUp(context);
+                                },
+                                child: const Text(
+                                  'Sign up',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: MyColors.blue,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -152,33 +199,80 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
   }
 }
 
-Widget myTextFieldTitle(String title, String labelField) {
-  return Container(
-    alignment: Alignment.topLeft,
-    margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w900,
-            color: MyColors.gray.withOpacity(0.5),
+class TextFieldTitle extends StatefulWidget {
+  final String _title;
+  final String _textLabel;
+  final TextEditingController _value;
+  final bool _isPassword;
+  late bool _passwordVisible = false;
+
+  TextFieldTitle(this._title, this._textLabel, this._value, this._isPassword, {Key? key})
+      : super(key: key);
+
+  @override
+  _MyTextFieldTitle createState() => _MyTextFieldTitle();
+}
+
+class _MyTextFieldTitle extends State<TextFieldTitle> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.topLeft,
+      margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget._title,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w900,
+              color: MyColors.gray.withOpacity(0.5),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        TextFormField(
-          initialValue: null,
-          maxLength: 30,
-          decoration: InputDecoration(
-            labelText: labelField,
-            border: const OutlineInputBorder(),
+          const SizedBox(
+            height: 15,
           ),
-        ),
-      ],
-    ),
-  );
+          TextFormField(
+            controller: widget._value,
+            initialValue: null,
+            maxLength: 30,
+            obscureText: !widget._passwordVisible && widget._isPassword,
+            decoration: InputDecoration(
+              labelText: widget._textLabel,
+              border: const OutlineInputBorder(),
+              suffixIcon: !widget._isPassword
+                  ? const Icon(Icons.check_circle)
+                  : IconButton(
+                      icon: Icon(
+                        widget._passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      splashRadius: 15,
+                      onPressed: () {
+                        setState(() {
+                          widget._passwordVisible = !widget._passwordVisible;
+                        });
+                      },
+                    ),
+              isDense: true,
+            ),
+            autocorrect: true,
+            keyboardType: TextInputType.text,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void onClickSignIn(Login login)
+{
+  print('username: ${login.username.text}');
+  print('password: ${login.password.text}');
+}
+void onClickLinkSignUp(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationSignUpScreen()));
 }
