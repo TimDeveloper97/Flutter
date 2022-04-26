@@ -4,8 +4,8 @@ import 'package:finance/shares/my_colors.dart';
 import 'package:flutter/material.dart';
 import '../icons/my_flutter_app_icons.dart';
 
-class MyHomeLoginPage extends StatelessWidget {
-  const MyHomeLoginPage({Key? key}) : super(key: key);
+class MyLoginPage extends StatelessWidget {
+  const MyLoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

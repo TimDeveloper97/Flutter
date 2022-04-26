@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  badges: ^2.0.2
   flutter:
     sdk: flutter
 
@@ -36,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  intl: any
   flutter_test:
     sdk: flutter
 
@@ -59,6 +61,9 @@ flutter:
   assets:
     - assets/images/process.jpeg
     - assets/images/login_background.png
+    - assets/images/cat.jpg
+    - assets/images/card.png
+    - assets/images/card1.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

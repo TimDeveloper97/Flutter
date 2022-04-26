@@ -1,6 +1,8 @@
+import 'package:finance/home/home_view.dart';
 import 'package:finance/login/signup_view.dart';
 import 'package:finance/shares/my_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/scheduler/ticker.dart';
 import '../icons/my_flutter_app_icons.dart';
 import '../models/login.dart';
 
@@ -13,7 +15,7 @@ class NavigationSignInScreen extends StatefulWidget {
   _NavigationSignInScreenState createState() => _NavigationSignInScreenState();
 }
 
-class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
+class _NavigationSignInScreenState extends State<NavigationSignInScreen> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,8 +129,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> {
                                     height: 50,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        print('click Sign in');
-                                        onClickSignIn(widget._login);
+                                        onClickSignIn(context, widget._login, this);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         primary: MyColors.blue,
@@ -268,10 +269,11 @@ class _MyTextFieldTitle extends State<TextFieldTitle> {
   }
 }
 
-void onClickSignIn(Login login)
+void onClickSignIn(BuildContext context, Login login, _NavigationSignInScreenState _navigationSignInScreenState)
 {
   print('username: ${login.username.text}');
   print('password: ${login.password.text}');
+  Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
 }
 void onClickLinkSignUp(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationSignUpScreen()));

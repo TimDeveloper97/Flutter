@@ -1,19 +1,26 @@
 import 'package:finance/login/signin_view.dart';
 import 'package:finance/shares/my_colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/login.dart';
 
 class NavigationSignUpScreen extends StatefulWidget {
   NavigationSignUpScreen({Key? key}) : super(key: key);
 
-  final Login _login = Login();
-  late bool _isAcceptTermConditions = false;
+  late Login _login;
+  late bool _isAcceptTermConditions;
 
   @override
   _NavigationSignUpScreenState createState() => _NavigationSignUpScreenState();
 }
 
 class _NavigationSignUpScreenState extends State<NavigationSignUpScreen> {
+  @override
+  void initState() {
+    widget._login = Login();
+    widget._isAcceptTermConditions = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,12 +161,7 @@ class _NavigationSignUpScreenState extends State<NavigationSignUpScreen> {
                                     width: double.infinity,
                                     height: 50,
                                     child: ElevatedButton(
-                                      onPressed: widget._isAcceptTermConditions
-                                          ? () {
-                                              print('click Sign up');
-                                              onClickSignUp(widget._login);
-                                            }
-                                          : null,
+                                      onPressed: widget._isAcceptTermConditions ? () => onClickSignUp(widget._login) : null,
                                       style: ElevatedButton.styleFrom(
                                         primary: MyColors.blue,
                                         onPrimary: MyColors.gray.withOpacity(0.1),
@@ -231,7 +233,7 @@ class TextFieldTitle extends StatefulWidget {
   final String _textLabel;
   final TextEditingController _value;
   final bool _isPassword;
-  late bool _passwordVisible = false;
+  late bool _passwordVisible;
 
   TextFieldTitle(this._title, this._textLabel, this._value, this._isPassword, {Key? key}) : super(key: key);
 
@@ -240,6 +242,11 @@ class TextFieldTitle extends StatefulWidget {
 }
 
 class _MyTextFieldTitle extends State<TextFieldTitle> {
+  @override
+  void initState() {
+    widget._passwordVisible = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -293,13 +300,17 @@ class _MyTextFieldTitle extends State<TextFieldTitle> {
 }
 
 void onClickSignUp(Login login) {
-  print('name: ${login.name.text}');
-  print('username: ${login.username.text}');
-  print('password: ${login.password.text}');
+  if (kDebugMode) {
+    print('name: ${login.name.text}');
+    print('username: ${login.username.text}');
+    print('password: ${login.password.text}');
+  }
 }
 
 void onClickTermConditions(BuildContext context) {
-  print('onClickTermConditions');
+  if (kDebugMode) {
+    print('onClickTermConditions');
+  }
 }
 
 void onClickLinkSignIn(BuildContext context) {
