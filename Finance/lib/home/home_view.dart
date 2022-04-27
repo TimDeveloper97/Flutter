@@ -1,6 +1,7 @@
-import 'dart:math';
-
+import 'package:finance/home/bugget.dart';
 import 'package:finance/home/card_slider.dart';
+import 'package:finance/home/date_timeline.dart';
+import 'package:finance/home/transaction_view.dart';
 import 'package:flutter/material.dart';
 import '../shares/my_colors.dart';
 import 'package:badges/badges.dart';
@@ -22,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: MyColors.appBackground,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //Body Container
             Expanded(
               child: SingleChildScrollView(
+                physics: const ScrollPhysics(),
                 padding: const EdgeInsets.only(top: 20),
                 child: body(context),
               ),
@@ -49,8 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Widget header() {
   return Container(
-    color: MyColors.gray.withOpacity(0.3),
-    padding: const EdgeInsets.only(left: 30, top: 20, right: 30, bottom: 10),
+    padding: const EdgeInsets.only(left: 50, top: 20, right: 30, bottom: 10),
     child: Stack(
       children: [
         Column(
@@ -107,8 +108,19 @@ Widget header() {
 }
 
 Widget body(BuildContext context) {
-  return Container(
-    child: CardSlider(),
+  return Column(
+    children: [
+      CardSlider(),
+      const Padding(padding: EdgeInsets.only(top: 20)),
+      DateTimeLine(),
+      const Padding(padding: EdgeInsets.only(top: 20)),
+      BudgetAccount('18600', '24800'),
+      const Padding(padding: EdgeInsets.only(top: 30)),
+      Container(
+        margin: const EdgeInsets.only(right: 50, left: 50),
+        child: TransactionView(),
+      ),
+    ],
   );
 }
 

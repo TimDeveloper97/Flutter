@@ -10,7 +10,7 @@ class MyLoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.App,
+      backgroundColor: MyColors.app,
       body: Container(
         margin: const EdgeInsets.all(20),
         child: Align(
@@ -129,7 +129,7 @@ Widget myButtonIconOutline(String text, IconData? icon, Function() callback) {
     child: OutlinedButton(
       onPressed: () => callback(),
       style: OutlinedButton.styleFrom(
-        primary: MyColors.App,
+        primary: MyColors.app,
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -165,7 +165,7 @@ Widget myButtonOutline(String text, Function() callback) {
       onPressed: () => callback(),
       style: OutlinedButton.styleFrom(
         primary: Colors.white,
-        backgroundColor: MyColors.App,
+        backgroundColor: MyColors.app,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

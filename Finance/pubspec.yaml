@@ -28,6 +28,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   badges: ^2.0.2
+  flutter_datetime_picker:
+    git:
+      url: https://github.com/AlexHartford/flutter_datetime_picker.git
+      ref: master
   flutter:
     sdk: flutter
 
