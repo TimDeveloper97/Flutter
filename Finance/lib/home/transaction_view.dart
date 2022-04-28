@@ -1,5 +1,6 @@
 import 'package:finance/models/transaction.dart';
 import 'package:flutter/material.dart';
+import '../icons/my_flutter_app_icons.dart';
 import '../shares/my_colors.dart';
 import 'package:intl/intl.dart';
 
@@ -78,7 +79,7 @@ class _TransactionView extends State<TransactionView> {
         size: 25,
       ),'Food & Baverages', 'Apr 26', '48000'),
       Transaction(const Icon(
-        Icons.all_inbox_rounded,
+        MyFlutterApp.dropbox,
         color: Colors.indigo,
         size: 25,
       ),'Dropbox', 'Next payment 28 May 2019', '26999'),
@@ -100,7 +101,7 @@ Widget itemView(Icon icon, String title, String des, String money) {
           border: Border.all(color: Colors.grey.withOpacity(0.05), width: 2),
         ),
         child: Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.center,
           child: icon,
         ),
       ),

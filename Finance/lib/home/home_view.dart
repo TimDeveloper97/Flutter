@@ -1,5 +1,7 @@
 import 'package:finance/home/bugget.dart';
+import 'package:finance/home/card_budget_slider.dart';
 import 'package:finance/home/card_slider.dart';
+import 'package:finance/home/card_subscriptions_slider.dart';
 import 'package:finance/home/date_timeline.dart';
 import 'package:finance/home/transaction_view.dart';
 import 'package:flutter/material.dart';
@@ -120,6 +122,14 @@ Widget body(BuildContext context) {
         margin: const EdgeInsets.only(right: 50, left: 50),
         child: TransactionView(),
       ),
+      const Padding(padding: EdgeInsets.only(top: 30)),
+      CardBudgetSlider(),
+      const Padding(padding: EdgeInsets.only(top: 30)),
+      Container(
+        color: MyColors.blue,
+        padding: const EdgeInsets.only(top: 30, bottom: 30),
+        child: CardSubscriptionsSlider(),
+      )
     ],
   );
 }

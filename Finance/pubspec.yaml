@@ -68,6 +68,8 @@ flutter:
     - assets/images/cat.jpg
     - assets/images/card.png
     - assets/images/card1.png
+    - assets/images/budget.jpeg
+    - assets/images/budget1.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

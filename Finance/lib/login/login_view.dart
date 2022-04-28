@@ -77,7 +77,7 @@ class MyLoginPage extends StatelessWidget {
                       height: 20,
                     ),
                     myButtonIconOutline(
-                        'Sign in with Google', MyFlutterApp.google_1, () {
+                        'Sign in with Google', MyFlutterApp.google, () {
                       print('sign in click');
                       Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationSignInScreen()));
                     }),

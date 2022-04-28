@@ -43,7 +43,7 @@ class _BudgetAccount extends State<BudgetAccount> {
           child: itemView(
               const Icon(
                 Icons.arrow_upward_outlined,
-                color: MyColors.primary,
+                color: Colors.green,
                 size: 36,
               ),
               'Income',
