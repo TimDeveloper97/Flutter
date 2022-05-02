@@ -4,8 +4,8 @@ import '../../icons/my_flutter_app_icons.dart';
 import '../../views/login/signin_view.dart';
 import '../../views/login/signup_view.dart';
 
-class MyLoginPage extends StatelessWidget {
-  const MyLoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

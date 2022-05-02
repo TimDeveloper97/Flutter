@@ -43,7 +43,7 @@ class _NavigationSignUpScreenState extends State<NavigationSignUpScreen> {
                   alignment: Alignment.topLeft,
                   child: ElevatedButton(
                     onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
-                    child: const Icon(Icons.arrow_back, color: MyColors.blue, size: 38),
+                    child: const Icon(Icons.arrow_back, color: MyColors.blue, size: 30),
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       primary: Colors.transparent,

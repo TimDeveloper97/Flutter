@@ -10,4 +10,5 @@ class MyColors {
   static const Color blue = Color(0xFF173dbc);
   static const Color whiteSmoke = Color(0xFFf0f1f3);
   static const Color yellow = Color(0xFFf8d365);
+  static const Color violet = Color(0xFF6200EE);
 }

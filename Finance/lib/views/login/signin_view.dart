@@ -3,7 +3,7 @@ import 'package:finance/views/login/signup_view.dart';
 import 'package:flutter/material.dart';
 import '../../views/login/signup_view.dart';
 import '../../models/login.dart';
-import '../home_view.dart';
+import '../main_view.dart';
 
 class NavigationSignInScreen extends StatefulWidget {
   NavigationSignInScreen({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(context),
                     child: const Icon(Icons.arrow_back,
-                        color: MyColors.blue, size: 38),
+                        color: MyColors.blue, size: 30),
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       primary: Colors.transparent,

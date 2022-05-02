@@ -1,46 +1,39 @@
-import 'package:finance/controls/home/bottom_bar.dart';
-import 'package:finance/controls/home/bugget.dart';
-import 'package:finance/controls/home/card_slider.dart';
-import 'package:finance/controls/home/card_subscriptions_slider.dart';
-import 'package:finance/controls/home/transaction_view.dart';
-import 'package:flutter/material.dart';
-import '../controls/home/card_budget_slider.dart';
-import '../controls/home/date_timeline.dart';
 import 'package:badges/badges.dart';
+import 'package:flutter/material.dart';
+import '../controls/home/bugget.dart';
+import '../controls/home/card_budget_slider.dart';
+import '../controls/home/card_slider.dart';
+import '../controls/home/card_subscriptions_slider.dart';
+import '../controls/home/date_timeline.dart';
+import '../controls/home/transaction_view.dart';
 import '../shares/my_colors.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget{
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePage createState() => _HomePage();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePage extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: MyColors.appBackground,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            //Header Container
-            header(),
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          //Header Container
+          header(),
 
-            //Body Container
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const ScrollPhysics(),
-                padding: const EdgeInsets.only(top: 20),
-                child: body(context),
-              ),
+          //Body Container
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const ScrollPhysics(),
+              padding: const EdgeInsets.only(top: 20),
+              child: body(),
             ),
-
-            //Footer Container
-            footer(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -104,7 +97,7 @@ Widget header() {
   );
 }
 
-Widget body(BuildContext context) {
+Widget body() {
   return Column(
     children: [
       CardSlider(),
@@ -127,8 +120,4 @@ Widget body(BuildContext context) {
       )
     ],
   );
-}
-
-Widget footer() {
-  return BottomBars();
 }
