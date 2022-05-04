@@ -21,7 +21,7 @@ List<Widget> _widgetOptions = const <Widget>[
 ];
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 2;
+  int _currentIndex = 3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
