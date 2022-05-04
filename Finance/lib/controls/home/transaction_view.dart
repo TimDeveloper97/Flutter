@@ -7,8 +7,10 @@ import 'package:intl/intl.dart';
 final oCcy = NumberFormat("#,##0", "en_US");
 
 class TransactionView extends StatefulWidget {
-  TransactionView({Key? key}) : super(key: key);
   List<Transaction> _transactions = [];
+  final int numberItemShow;
+
+  TransactionView({Key? key, required this.numberItemShow}) : super(key: key);
 
   @override
   _TransactionView createState() => _TransactionView();
@@ -17,72 +19,127 @@ class TransactionView extends StatefulWidget {
 class _TransactionView extends State<TransactionView> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
-          children: [
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Transactions',
-                style: TextStyle(
-                  color: MyColors.primary,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: InkWell(
-                onTap: () { print('see all click'); },
-                child: const Text(
-                  'See All',
-                  style: TextStyle(
-                    color: MyColors.blue,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const Padding(padding: EdgeInsets.only(bottom: 20)),
-        ListView.builder(
-          itemCount: widget._transactions.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            final item = widget._transactions[index];
-            return itemView(
-                item.icon,
-                item.title,
-                item.description,
-                item.money);
-          },
-        ),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: Column(
+        children: [
+          ListView.builder(
+            itemCount: widget._transactions.length < widget.numberItemShow ? widget._transactions.length : widget.numberItemShow,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final item = widget._transactions[index];
+              return Padding(padding: const EdgeInsets.only(top: 5, right: 15), child: itemView(item.icon, item.title, item.description, item.money),);
+            },
+          ),
+        ],
+      ),
     );
   }
 
   @override
   void initState() {
     widget._transactions = [
-      Transaction(const Icon(
-        Icons.work,
-        color: Colors.green,
-        size: 25,
-      ),'Freelance Work', 'Apr 28', '26000'),
-      Transaction(const Icon(
-        Icons.fastfood,
-        color: Colors.amber,
-        size: 25,
-      ),'Food & Baverages', 'Apr 26', '48000'),
-      Transaction(const Icon(
-        MyFlutterApp.dropbox,
-        color: Colors.indigo,
-        size: 25,
-      ),'Dropbox', 'Next payment 28 May 2019', '26999'),
+      Transaction(
+          const Icon(
+            Icons.work,
+            color: Colors.green,
+            size: 25,
+          ),
+          'Freelance Work',
+          'Apr 28',
+          '26000'),
+      Transaction(
+          const Icon(
+            Icons.fastfood,
+            color: Colors.amber,
+            size: 25,
+          ),
+          'Food & Baverages',
+          'Apr 26',
+          '48000'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.dropbox,
+            color: Colors.indigo,
+            size: 25,
+          ),
+          'Dropbox',
+          'Next payment 28 May 2019',
+          '26999'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.xbox,
+            color: Colors.red,
+            size: 25,
+          ),
+          'XBox',
+          'Next payment 30 May 2022',
+          '36060'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.video,
+            color: Colors.cyan,
+            size: 25,
+          ),
+          'Video',
+          'Next payment 11 May 2021',
+          '10000'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.spotify,
+            color: Colors.lightGreen,
+            size: 25,
+          ),
+          'Spotify',
+          'Next payment 28 May 2012',
+          '87030'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.google,
+            color: Colors.indigo,
+            size: 25,
+          ),
+          'Google',
+          'Next payment 28 May 2022',
+          '31010'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.xbox,
+            color: Colors.red,
+            size: 25,
+          ),
+          'XBox',
+          'Next payment 30 May 2022',
+          '36060'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.video,
+            color: Colors.cyan,
+            size: 25,
+          ),
+          'Video',
+          'Next payment 11 May 2021',
+          '10000'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.spotify,
+            color: Colors.lightGreen,
+            size: 25,
+          ),
+          'Spotify',
+          'Next payment 28 May 2012',
+          '87030'),
+      Transaction(
+          const Icon(
+            MyFlutterApp.google,
+            color: Colors.indigo,
+            size: 25,
+          ),
+          'Google',
+          'Next payment 28 May 2022',
+          '31010'),
     ];
   }
 }
@@ -169,6 +226,40 @@ Widget itemView(Icon icon, String title, String des, String money) {
           ),
         ),
       )
+    ],
+  );
+}
+
+Widget titleTransaction() {
+  return Stack(
+    children: [
+      const Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          'Transactions',
+          style: TextStyle(
+            color: MyColors.primary,
+            fontSize: 22,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.topRight,
+        child: InkWell(
+          onTap: () {
+            print('see all click');
+          },
+          child: const Text(
+            'See All',
+            style: TextStyle(
+              color: MyColors.blue,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
     ],
   );
 }
