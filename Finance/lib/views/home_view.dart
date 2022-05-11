@@ -8,14 +8,14 @@ import '../controls/home/date_timeline.dart';
 import '../controls/home/transaction_view.dart';
 import '../shares/my_colors.dart';
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePage createState() => _HomePage();
 }
 
-class _HomePage extends State<HomePage>{
+class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -107,8 +107,16 @@ Widget body() {
       BudgetAccount('18600', '24800'),
       const Padding(padding: EdgeInsets.only(top: 30)),
       Container(
-        margin: const EdgeInsets.only(right: 50, left: 50),
-        child: TransactionView(),
+        margin: const EdgeInsets.only(right: 30, left: 50),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15, right: 15),
+              child: titleTransaction(),
+            ),
+            TransactionView(numberItemShow: 3),
+          ],
+        ),
       ),
       const Padding(padding: EdgeInsets.only(top: 30)),
       CardBudgetSlider(),

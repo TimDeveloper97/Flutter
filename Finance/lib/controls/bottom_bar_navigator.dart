@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
   final Function onClicked;
-  BottomNavBar( {Key? key, required this.onClicked}) : super(key: key);
+  final int index;
+  BottomNavBar( {Key? key, required this.index, required this.onClicked}) : super(key: key);
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _index = 0;
   setBottomBarIndex(index) {
     setState(() {
       widget.onClicked(index);
-      _index = index;
       print('${index}');
     });
   }
@@ -46,7 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 IconButton(
                   icon: Icon(
                     Icons.home,
-                    color: _index == 0 ? Colors.blue : Colors.grey.shade400,
+                    color: widget.index == 0 ? Colors.blue : Colors.grey.shade400,
                     size: 30,
                   ),
                   onPressed: () {
@@ -59,7 +58,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 IconButton(
                     icon: Icon(
                       Icons.bar_chart,
-                      color: _index == 1 ? Colors.blue : Colors.grey.shade400,
+                      color: widget.index == 1 ? Colors.blue : Colors.grey.shade400,
                       size: 30,
                     ),
                     padding: const EdgeInsets.only(bottom: 5),
@@ -73,7 +72,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 IconButton(
                     icon: Icon(
                       Icons.history,
-                      color: _index == 2 ? Colors.blue : Colors.grey.shade400,
+                      color: widget.index == 2 ? Colors.blue : Colors.grey.shade400,
                       size: 30,
                     ),
                     padding: const EdgeInsets.only(bottom: 5),
@@ -84,7 +83,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 IconButton(
                     icon: Icon(
                       Icons.account_circle,
-                      color: _index == 3 ? Colors.blue : Colors.grey.shade400,
+                      color: widget.index == 3 ? Colors.blue : Colors.grey.shade400,
                       size: 30,
                     ),
                     padding: const EdgeInsets.only(bottom: 5),

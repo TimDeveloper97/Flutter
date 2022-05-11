@@ -1,4 +1,4 @@
-import 'package:finance/views/wallet_view.dart';
+import 'package:finance/views/history_view.dart';
 import 'package:flutter/material.dart';
 import '../controls/bottom_bar_navigator.dart';
 import '../shares/my_colors.dart';
@@ -16,20 +16,19 @@ class MyHomePage extends StatefulWidget {
 List<Widget> _widgetOptions = const <Widget>[
   HomePage(),
   ChartPage(),
-  WalletPage(),
+  HistoryPage(),
   AccountPage(),
 ];
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
+  int _currentIndex = 3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: MyColors.appBackground,
-      body: Container(
-        child: _widgetOptions.elementAt(_currentIndex),
-      ),
-      bottomNavigationBar: BottomNavBar(onClicked: (index) {
+      body: _widgetOptions.elementAt(_currentIndex),
+      bottomNavigationBar: BottomNavBar(index: _currentIndex, onClicked: (index) {
         setState(() {
           _currentIndex = index;
         });
