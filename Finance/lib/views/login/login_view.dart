@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../icons/my_flutter_app_icons.dart';
 import '../../views/login/signin_view.dart';
 import '../../views/login/signup_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
