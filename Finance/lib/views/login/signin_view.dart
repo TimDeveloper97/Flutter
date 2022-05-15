@@ -1,9 +1,12 @@
+import 'package:finance/controllers/login/auth.dart';
 import 'package:finance/shares/my_colors.dart';
 import 'package:finance/views/login/signup_view.dart';
 import 'package:flutter/material.dart';
 import '../../views/login/signup_view.dart';
 import '../../models/login.dart';
 import '../main_view.dart';
+
+final BaseAuth _auth = Auth();
 
 class NavigationSignInScreen extends StatefulWidget {
   NavigationSignInScreen({Key? key}) : super(key: key);
@@ -272,6 +275,10 @@ void onClickSignIn(BuildContext context, Login login, _NavigationSignInScreenSta
 {
   print('username: ${login.username.text}');
   print('password: ${login.password.text}');
+
+  var id = _auth.createUser(login.username.text, login.password.text);
+  print("result: ${id.toString()}");
+
   Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
 }
 void onClickLinkSignUp(BuildContext context) {
