@@ -1,7 +1,7 @@
-import 'package:finance/controllers/login/auth.dart';
 import 'package:finance/shares/my_colors.dart';
 import 'package:finance/views/login/signup_view.dart';
 import 'package:flutter/material.dart';
+import '../../service/firebase/f_auth.dart';
 import '../../views/login/signup_view.dart';
 import '../../models/login.dart';
 import '../main_view.dart';
@@ -17,13 +17,13 @@ class NavigationSignInScreen extends StatefulWidget {
   _NavigationSignInScreenState createState() => _NavigationSignInScreenState();
 }
 
-class _NavigationSignInScreenState extends State<NavigationSignInScreen> with SingleTickerProviderStateMixin{
+class _NavigationSignInScreenState extends State<NavigationSignInScreen> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-        children: [
-          Stack(
+      children: [
+        Stack(
           children: [
             Image.asset(
               'assets/images/login_background.png',
@@ -38,8 +38,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
                   alignment: Alignment.topLeft,
                   child: ElevatedButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back,
-                        color: MyColors.blue, size: 30),
+                    child: const Icon(Icons.arrow_back, color: MyColors.blue, size: 30),
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       primary: Colors.transparent,
@@ -76,9 +75,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 shadowColor: Colors.black.withOpacity(0.5),
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40)),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
                 ),
                 elevation: 5,
                 margin: const EdgeInsets.only(top: 220),
@@ -105,8 +102,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
                         ),
                       ),
                       const SizedBox(height: 30),
-                      TextFieldTitle('Username or email',
-                          'Enter your username or email', widget._login.username, false),
+                      TextFieldTitle('Username or email', 'Enter your username or email', widget._login.username, false),
                       TextFieldTitle('Password', 'Enter your password', widget._login.password, true),
                       Container(
                           padding: const EdgeInsets.only(left: 15, bottom: 15),
@@ -135,11 +131,9 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
                                       },
                                       style: ElevatedButton.styleFrom(
                                         primary: MyColors.blue,
-                                        onPrimary:
-                                            MyColors.gray.withOpacity(0.1),
+                                        onPrimary: MyColors.gray.withOpacity(0.1),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
+                                          borderRadius: BorderRadius.circular(10.0),
                                         ),
                                       ),
                                       child: const Text(
@@ -185,8 +179,7 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
                                     color: MyColors.blue,
                                     decoration: TextDecoration.underline,
                                   ),
-                                )
-                            ),
+                                )),
                           ],
                         ),
                       )
@@ -200,6 +193,12 @@ class _NavigationSignInScreenState extends State<NavigationSignInScreen> with Si
       ],
     ));
   }
+
+  @override
+  void initState() {
+    widget._login.username.text = "abc@gmail.com";
+    widget._login.password.text = "1234567";
+  }
 }
 
 class TextFieldTitle extends StatefulWidget {
@@ -209,8 +208,7 @@ class TextFieldTitle extends StatefulWidget {
   final bool _isPassword;
   late bool _passwordVisible = false;
 
-  TextFieldTitle(this._title, this._textLabel, this._value, this._isPassword, {Key? key})
-      : super(key: key);
+  TextFieldTitle(this._title, this._textLabel, this._value, this._isPassword, {Key? key}) : super(key: key);
 
   @override
   _MyTextFieldTitle createState() => _MyTextFieldTitle();
@@ -248,9 +246,7 @@ class _MyTextFieldTitle extends State<TextFieldTitle> {
                   ? const Icon(Icons.check_circle)
                   : IconButton(
                       icon: Icon(
-                        widget._passwordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                        widget._passwordVisible ? Icons.visibility : Icons.visibility_off,
                         color: Theme.of(context).primaryColorDark,
                       ),
                       splashRadius: 15,
@@ -271,16 +267,17 @@ class _MyTextFieldTitle extends State<TextFieldTitle> {
   }
 }
 
-void onClickSignIn(BuildContext context, Login login, _NavigationSignInScreenState _navigationSignInScreenState)
-{
+void onClickSignIn(BuildContext context, Login login, _NavigationSignInScreenState _navigationSignInScreenState) async {
   print('username: ${login.username.text}');
   print('password: ${login.password.text}');
 
-  var id = _auth.createUser(login.username.text, login.password.text);
-  print("result: ${id.toString()}");
-
-  Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+  var status = await _auth.signIn(login.username.text, login.password.text);
+  print("result: ${status}");
+  if(status == true) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+  }
 }
+
 void onClickLinkSignUp(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => NavigationSignUpScreen()));
 }

@@ -1,6 +1,7 @@
 import 'package:finance/shares/my_colors.dart';
 import 'package:flutter/material.dart';
 import '../../icons/my_flutter_app_icons.dart';
+import '../../service/firebase/f_options.dart';
 import '../../views/login/signin_view.dart';
 import '../../views/login/signup_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,10 +10,10 @@ import 'package:firebase_core/firebase_core.dart';
 
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    FirebaseApp firebaseApp = await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
     return firebaseApp;
   }
 
